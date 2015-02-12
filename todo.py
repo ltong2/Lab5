@@ -20,8 +20,7 @@ def task():
         category = request.form['category']
         priority = request.form['priority']
         description = request.form['description']
-        ID = request.form['id']
-        addTask(category, priority, description,ID)
+        addTask(category, priority, description)
         flash('New task added.')
         return redirect(url_for('task'))
     
@@ -74,10 +73,10 @@ def close_connection():
     if db is not None:
         db.close
         
-def addTask(category, priority, description,ID):
+def addTask(category, priority, description):
     global count
     count += 1
-    query_db('insert into tasks(category, priority, description,id)  values (?,?,?,?)', [category , int(priority), description,int(ID)], one = True)
+    query_db('insert into tasks(category, priority, description)  values (?,?,?)', [category , int(priority), description], one = True)
     get_db().commit()
         
 def query_db(query, args=(), one=False):
