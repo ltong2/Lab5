@@ -72,6 +72,7 @@ def close_connection():
     db = getattr(g, '_database', None)
     if db is not None:
         db.close
+        db=None
         
 def addTask(category, priority, description):
     global count
